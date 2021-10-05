@@ -174,15 +174,13 @@ final class MovieTableViewCell: UITableViewCell {
     }
 
     func configure() {
-        backgroundColor = .black
-        selectionStyle = .none
         guard let movie = movie else { return }
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
         let imagePath = movie.posterPath
         let fullStringOfImageURL = baseStringOfImageURL + imagePath
         guard let imageURL = URL(string: fullStringOfImageURL) else { return }
-        
+
         let fetchImageTask = URLSession.shared.dataTask(with: imageURL) { data, _, _ in
             guard let imageData = data else { return }
             guard let movieImage = UIImage(data: imageData) else { return }
@@ -195,6 +193,8 @@ final class MovieTableViewCell: UITableViewCell {
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        backgroundColor = .black
+        selectionStyle = .none
         contentView.addSubview(movieBackgroundView)
         addSubViewsToBackgroundView()
         addBackgroundViewConstraints()

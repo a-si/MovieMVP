@@ -82,17 +82,17 @@ final class MoviesViewController: UIViewController {
     }
 
     private func createConstraints() {
-        let safeArera = view.safeAreaLayoutGuide
+        let safeArea = view.safeAreaLayoutGuide
         moviesSearchBar.topAnchor.constraint(
-            equalTo: safeArera.topAnchor,
+            equalTo: safeArea.topAnchor,
             constant: 10
         ).isActive = true
         moviesSearchBar.leftAnchor.constraint(
-            equalTo: safeArera.leftAnchor,
+            equalTo: safeArea.leftAnchor,
             constant: 10
         ).isActive = true
         moviesSearchBar.rightAnchor.constraint(
-            equalTo: safeArera.rightAnchor,
+            equalTo: safeArea.rightAnchor,
             constant: -10
         ).isActive = true
         moviesSearchBar.heightAnchor.constraint(equalToConstant: 35).isActive = true
@@ -102,11 +102,11 @@ final class MoviesViewController: UIViewController {
             constant: 10
         ).isActive = true
         moviesSegmentedControl.leftAnchor.constraint(
-            equalTo: safeArera.leftAnchor,
+            equalTo: safeArea.leftAnchor,
             constant: 10
         ).isActive = true
         moviesSegmentedControl.rightAnchor.constraint(
-            equalTo: safeArera.rightAnchor,
+            equalTo: safeArea.rightAnchor,
             constant: -10
         ).isActive = true
         moviesSegmentedControl.heightAnchor.constraint(equalToConstant: 35).isActive = true
