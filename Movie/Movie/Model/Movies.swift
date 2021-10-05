@@ -1,9 +1,5 @@
-//
-//  Movies.swift
-//  Movie
-//
-//  Created by Артем on 29.07.2021.
-//
+// Movies.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 

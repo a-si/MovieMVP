@@ -1,9 +1,5 @@
-//
-//  DetailMovieViewController.swift
-//  Movie
-//
-//  Created by Артем on 29.07.2021.
-//
+// DetailMovieViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
@@ -66,37 +62,58 @@ final class DetailMovieViewController: UIViewController {
 
     private func addPosterImageViewConstraints() {
         let safeArea = view.safeAreaLayoutGuide
-        detailPosterImageView.topAnchor.constraint(equalTo: safeArea.topAnchor,
-                                                   constant: 20).isActive = true
-        detailPosterImageView.leftAnchor.constraint(equalTo: view.leftAnchor,
-                                                    constant: 80).isActive = true
-        detailPosterImageView.rightAnchor.constraint(equalTo: view.rightAnchor,
-                                                     constant: -80).isActive = true
+        detailPosterImageView.topAnchor.constraint(
+            equalTo: safeArea.topAnchor,
+            constant: 20
+        ).isActive = true
+        detailPosterImageView.leftAnchor.constraint(
+            equalTo: view.leftAnchor,
+            constant: 80
+        ).isActive = true
+        detailPosterImageView.rightAnchor.constraint(
+            equalTo: view.rightAnchor,
+            constant: -80
+        ).isActive = true
         detailPosterImageView.heightAnchor.constraint(
-            equalToConstant: view.bounds.height / 2 - 100).isActive = true
+            equalToConstant: view.bounds.height / 2 - 100
+        ).isActive = true
     }
 
     private func addMovieNameLabelConstraints() {
-        movieNameLabel.topAnchor.constraint(equalTo: detailPosterImageView.bottomAnchor,
-                                            constant: 15).isActive = true
+        movieNameLabel.topAnchor.constraint(
+            equalTo: detailPosterImageView.bottomAnchor,
+            constant: 15
+        ).isActive = true
         movieNameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         movieNameLabel.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        movieNameLabel.leftAnchor.constraint(equalTo: view.leftAnchor,
-                                             constant: 30).isActive = true
-        movieNameLabel.rightAnchor.constraint(equalTo: view.rightAnchor,
-                                              constant: -30).isActive = true
+        movieNameLabel.leftAnchor.constraint(
+            equalTo: view.leftAnchor,
+            constant: 30
+        ).isActive = true
+        movieNameLabel.rightAnchor.constraint(
+            equalTo: view.rightAnchor,
+            constant: -30
+        ).isActive = true
     }
 
     private func addMovieDescriptionLabelConstraints() {
         let safeArea = view.safeAreaLayoutGuide
-        movieDescriptionLabel.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor,
-                                                   constant: 5).isActive = true
-        movieDescriptionLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor,
-                                                    constant: 30).isActive = true
-        movieDescriptionLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor,
-                                                     constant: -30).isActive = true
-        movieDescriptionLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor,
-                                                      constant: 1).isActive = true
+        movieDescriptionLabel.topAnchor.constraint(
+            equalTo: movieNameLabel.bottomAnchor,
+            constant: 5
+        ).isActive = true
+        movieDescriptionLabel.leftAnchor.constraint(
+            equalTo: safeArea.leftAnchor,
+            constant: 30
+        ).isActive = true
+        movieDescriptionLabel.rightAnchor.constraint(
+            equalTo: safeArea.rightAnchor,
+            constant: -30
+        ).isActive = true
+        movieDescriptionLabel.bottomAnchor.constraint(
+            equalTo: safeArea.bottomAnchor,
+            constant: 1
+        ).isActive = true
     }
 
     override func viewDidLoad() {

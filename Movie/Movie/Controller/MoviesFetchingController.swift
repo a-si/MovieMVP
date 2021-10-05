@@ -1,9 +1,5 @@
-//
-//  MoviesFetchingController.swift
-//  Movie
-//
-//  Created by Артем on 29.07.2021.
-//
+// MoviesFetchingController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import Foundation
 

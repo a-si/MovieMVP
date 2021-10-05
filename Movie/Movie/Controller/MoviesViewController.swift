@@ -1,22 +1,12 @@
-//
-//  ViewController.swift
-//  Movie
-//
-//  Created by Артем on 28.07.2021.
-//
+// MoviesViewController.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
 final class MoviesViewController: UIViewController {
     // MARK: - Private Variables
 
-    private var moviesArray = [Movie]()
-
-    // MARK: - Private Contstants
-
-    private let urlStringsArray: [URLStrings] = [.popular, .topRated, .upComing]
-
-    private let moviesFetchingController = MoviesFetchingController()
+    var presenter: MainViewPresenterProtocol!
 
     private let moviesSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -24,7 +14,6 @@ final class MoviesViewController: UIViewController {
         searchBar.searchBarStyle = .minimal
         searchBar.barStyle = .black
         searchBar.searchTextField.textColor = .white
-
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
@@ -46,36 +35,44 @@ final class MoviesViewController: UIViewController {
         return tableView
     }()
 
+    // MARK: - Life Cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "Movies"
-        view.backgroundColor = .black
-        moviesTableView.backgroundColor = .black
-        moviesTableView.separatorStyle = .none
         fetchMovies()
         addViewsToMainView()
+        customizeUI()
         createConstraints()
-        moviesTableView.register(MovieTableViewCell.self,
-                                 forCellReuseIdentifier: MovieTableViewCell.identifier)
-        moviesTableView.delegate = self
-        moviesTableView.dataSource = self
+        registerCell()
+        setDelegateAndDataSurce()
     }
 
     // MARK: - Private Methods
 
+    private func registerCell() {
+        moviesTableView.register(
+            MovieTableViewCell.self,
+            forCellReuseIdentifier: MovieTableViewCell.identifier
+        )
+    }
+
+    private func setDelegateAndDataSurce() {
+        moviesTableView.delegate = self
+        moviesTableView.dataSource = self
+    }
+
+    private func customizeUI() {
+        navigationItem.title = "Movies"
+        view.backgroundColor = .black
+        moviesTableView.backgroundColor = .black
+        moviesTableView.separatorStyle = .none
+    }
+
     @objc private func fetchMovies() {
-        let currentURLString = urlStringsArray[moviesSegmentedControl.selectedSegmentIndex]
-        print(currentURLString.rawValue)
-        moviesFetchingController.fetchMovies(withURLString: currentURLString.rawValue) { fetchedMovies in
-            guard let fetchedMovies = fetchedMovies else {
-                print("Completion Error. Can not fetch the data")
-                return
-            }
-            DispatchQueue.main.async {
-                self.moviesArray = fetchedMovies
-                self.moviesTableView.reloadData()
-            }
-        }
+        presenter.fetchMovies(
+            byCategoryNumber:
+            moviesSegmentedControl.selectedSegmentIndex
+        )
     }
 
     private func addViewsToMainView() {
@@ -86,24 +83,38 @@ final class MoviesViewController: UIViewController {
 
     private func createConstraints() {
         let safeArera = view.safeAreaLayoutGuide
-        moviesSearchBar.topAnchor.constraint(equalTo: safeArera.topAnchor,
-                                             constant: 10).isActive = true
-        moviesSearchBar.leftAnchor.constraint(equalTo: safeArera.leftAnchor,
-                                              constant: 10).isActive = true
-        moviesSearchBar.rightAnchor.constraint(equalTo: safeArera.rightAnchor,
-                                               constant: -10).isActive = true
+        moviesSearchBar.topAnchor.constraint(
+            equalTo: safeArera.topAnchor,
+            constant: 10
+        ).isActive = true
+        moviesSearchBar.leftAnchor.constraint(
+            equalTo: safeArera.leftAnchor,
+            constant: 10
+        ).isActive = true
+        moviesSearchBar.rightAnchor.constraint(
+            equalTo: safeArera.rightAnchor,
+            constant: -10
+        ).isActive = true
         moviesSearchBar.heightAnchor.constraint(equalToConstant: 35).isActive = true
 
-        moviesSegmentedControl.topAnchor.constraint(equalTo: moviesSearchBar.bottomAnchor,
-                                                    constant: 10).isActive = true
-        moviesSegmentedControl.leftAnchor.constraint(equalTo: safeArera.leftAnchor,
-                                                     constant: 10).isActive = true
-        moviesSegmentedControl.rightAnchor.constraint(equalTo: safeArera.rightAnchor,
-                                                      constant: -10).isActive = true
+        moviesSegmentedControl.topAnchor.constraint(
+            equalTo: moviesSearchBar.bottomAnchor,
+            constant: 10
+        ).isActive = true
+        moviesSegmentedControl.leftAnchor.constraint(
+            equalTo: safeArera.leftAnchor,
+            constant: 10
+        ).isActive = true
+        moviesSegmentedControl.rightAnchor.constraint(
+            equalTo: safeArera.rightAnchor,
+            constant: -10
+        ).isActive = true
         moviesSegmentedControl.heightAnchor.constraint(equalToConstant: 35).isActive = true
 
-        moviesTableView.topAnchor.constraint(equalTo: moviesSegmentedControl.bottomAnchor,
-                                             constant: 10).isActive = true
+        moviesTableView.topAnchor.constraint(
+            equalTo: moviesSegmentedControl.bottomAnchor,
+            constant: 10
+        ).isActive = true
         moviesTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         moviesTableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         moviesTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -119,7 +130,7 @@ extension MoviesViewController: UITableViewDelegate {
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailMovieViewController = DetailMovieViewController()
-        detailMovieViewController.movie = moviesArray[indexPath.row]
+        detailMovieViewController.movie = presenter.movies[indexPath.row]
         navigationController?.pushViewController(detailMovieViewController, animated: true)
     }
 }
@@ -128,7 +139,7 @@ extension MoviesViewController: UITableViewDelegate {
 
 extension MoviesViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return moviesArray.count
+        return presenter.movies.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -136,8 +147,16 @@ extension MoviesViewController: UITableViewDataSource {
             withIdentifier: MovieTableViewCell.identifier,
             for: indexPath
         ) as? MovieTableViewCell else { return UITableViewCell() }
-        cell.movie = moviesArray[indexPath.row]
+        cell.movie = presenter.movies[indexPath.row]
         cell.configure()
         return cell
+    }
+}
+
+// MARK: - MainViewProtocol
+
+extension MoviesViewController: MainViewProtocol {
+    func setMovies(movies: [Movie]) {
+        moviesTableView.reloadData()
     }
 }

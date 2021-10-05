@@ -1,14 +1,10 @@
-//
-//  MovieTableViewCell.swift
-//  Movie
-//
-//  Created by Артем on 28.07.2021.
-//
+// MovieTableViewCell.swift
+// Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
 final class MovieTableViewCell: UITableViewCell {
-    // MARK: Static Constant
+    // MARK: Static Constants
 
     static let identifier = "MovieTableViewCell"
 
@@ -85,14 +81,22 @@ final class MovieTableViewCell: UITableViewCell {
     // MARK: Private Methods
 
     private func addBackgroundViewConstraints() {
-        movieBackgroundView.topAnchor.constraint(equalTo: contentView.topAnchor,
-                                                 constant: 5).isActive = true
-        movieBackgroundView.leftAnchor.constraint(equalTo: contentView.leftAnchor,
-                                                  constant: 10).isActive = true
-        movieBackgroundView.rightAnchor.constraint(equalTo: contentView.rightAnchor,
-                                                   constant: -10).isActive = true
-        movieBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor,
-                                                    constant: -5).isActive = true
+        movieBackgroundView.topAnchor.constraint(
+            equalTo: contentView.topAnchor,
+            constant: 5
+        ).isActive = true
+        movieBackgroundView.leftAnchor.constraint(
+            equalTo: contentView.leftAnchor,
+            constant: 10
+        ).isActive = true
+        movieBackgroundView.rightAnchor.constraint(
+            equalTo: contentView.rightAnchor,
+            constant: -10
+        ).isActive = true
+        movieBackgroundView.bottomAnchor.constraint(
+            equalTo: contentView.bottomAnchor,
+            constant: -5
+        ).isActive = true
     }
 
     private func addPosterImageViewConstraints() {
@@ -103,39 +107,61 @@ final class MovieTableViewCell: UITableViewCell {
     }
 
     private func addMovieNameLabelConstraints() {
-        movieNameLabel.topAnchor.constraint(equalTo: movieBackgroundView.topAnchor,
-                                            constant: 5).isActive = true
-        movieNameLabel.leftAnchor.constraint(equalTo: posterImageView.rightAnchor,
-                                             constant: 20).isActive = true
-        movieNameLabel.rightAnchor.constraint(equalTo: movieBackgroundView.rightAnchor,
-                                              constant: -20).isActive = true
+        movieNameLabel.topAnchor.constraint(
+            equalTo: movieBackgroundView.topAnchor,
+            constant: 5
+        ).isActive = true
+        movieNameLabel.leftAnchor.constraint(
+            equalTo: posterImageView.rightAnchor,
+            constant: 20
+        ).isActive = true
+        movieNameLabel.rightAnchor.constraint(
+            equalTo: movieBackgroundView.rightAnchor,
+            constant: -20
+        ).isActive = true
         movieNameLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
     }
 
     private func addMovieDescriptionLabelConstraints() {
-        movieDescriptionLabel.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor,
-                                                   constant: 5).isActive = true
-        movieDescriptionLabel.leftAnchor.constraint(equalTo: posterImageView.rightAnchor,
-                                                    constant: 10).isActive = true
-        movieDescriptionLabel.rightAnchor.constraint(equalTo: movieBackgroundView.rightAnchor,
-                                                     constant: -10).isActive = true
-        movieDescriptionLabel.bottomAnchor.constraint(equalTo: movieBackgroundView.bottomAnchor,
-                                                      constant: -30).isActive = true
+        movieDescriptionLabel.topAnchor.constraint(
+            equalTo: movieNameLabel.bottomAnchor,
+            constant: 5
+        ).isActive = true
+        movieDescriptionLabel.leftAnchor.constraint(
+            equalTo: posterImageView.rightAnchor,
+            constant: 10
+        ).isActive = true
+        movieDescriptionLabel.rightAnchor.constraint(
+            equalTo: movieBackgroundView.rightAnchor,
+            constant: -10
+        ).isActive = true
+        movieDescriptionLabel.bottomAnchor.constraint(
+            equalTo: movieBackgroundView.bottomAnchor,
+            constant: -30
+        ).isActive = true
     }
 
     private func addMovieReleaseDateLabelConstraints() {
-        movieReleaseDateLabel.topAnchor.constraint(equalTo: movieDescriptionLabel.bottomAnchor,
-                                                   constant: 5).isActive = true
-        movieReleaseDateLabel.rightAnchor.constraint(equalTo: movieBackgroundView.rightAnchor,
-                                                     constant: -10).isActive = true
+        movieReleaseDateLabel.topAnchor.constraint(
+            equalTo: movieDescriptionLabel.bottomAnchor,
+            constant: 5
+        ).isActive = true
+        movieReleaseDateLabel.rightAnchor.constraint(
+            equalTo: movieBackgroundView.rightAnchor,
+            constant: -10
+        ).isActive = true
         movieReleaseDateLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
     }
 
     private func addMovieRateLabelConstraints() {
-        movieBackgroundView.rightAnchor.constraint(equalTo: posterImageView.rightAnchor,
-                                                   constant: -40).isActive = true
-        movieBackgroundView.bottomAnchor.constraint(equalTo: posterImageView.bottomAnchor,
-                                                    constant: -40).isActive = true
+        movieBackgroundView.rightAnchor.constraint(
+            equalTo: posterImageView.rightAnchor,
+            constant: -40
+        ).isActive = true
+        movieBackgroundView.bottomAnchor.constraint(
+            equalTo: posterImageView.bottomAnchor,
+            constant: -40
+        ).isActive = true
         movieBackgroundView.heightAnchor.constraint(equalToConstant: 15).isActive = true
         movieBackgroundView.widthAnchor.constraint(equalToConstant: 15).isActive = true
     }
@@ -150,13 +176,13 @@ final class MovieTableViewCell: UITableViewCell {
     func configure() {
         backgroundColor = .black
         selectionStyle = .none
-        contentView.addSubview(movieBackgroundView)
-        addSubViewsToBackgroundView()
-
         guard let movie = movie else { return }
+        movieNameLabel.text = movie.title
+        movieDescriptionLabel.text = movie.overview
         let imagePath = movie.posterPath
         let fullStringOfImageURL = baseStringOfImageURL + imagePath
         guard let imageURL = URL(string: fullStringOfImageURL) else { return }
+        
         let fetchImageTask = URLSession.shared.dataTask(with: imageURL) { data, _, _ in
             guard let imageData = data else { return }
             guard let movieImage = UIImage(data: imageData) else { return }
@@ -165,12 +191,12 @@ final class MovieTableViewCell: UITableViewCell {
             }
         }
         fetchImageTask.resume()
-        movieNameLabel.text = movie.title
-        movieDescriptionLabel.text = movie.overview
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
+        contentView.addSubview(movieBackgroundView)
+        addSubViewsToBackgroundView()
         addBackgroundViewConstraints()
         addPosterImageViewConstraints()
         addMovieNameLabelConstraints()
