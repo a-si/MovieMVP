@@ -6,7 +6,6 @@ import UIKit
 
 protocol MovieAPIServiceProtocol {
     func fetchMovies(withURLString urlString: String, completion: @escaping (Result<[Movie]?, Error>) -> Void)
-
     func fetchImage(forMovie movie: Movie?, completion: @escaping (UIImage) -> Void)
 }
 

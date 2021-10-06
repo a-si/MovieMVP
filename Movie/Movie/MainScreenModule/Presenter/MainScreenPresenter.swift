@@ -16,7 +16,7 @@ protocol MainViewPresenterProtocol: AnyObject {
 final class MainScreenPresenter: MainViewPresenterProtocol {
     private var urlStrings: [URLStrings] = [.popular, .topRated, .upComing]
     private weak var view: MainViewProtocol?
-    var movies: [Movie]? = []
+    var movies: [Movie]?
 
     init(view: MainViewProtocol) {
         self.view = view
@@ -27,10 +27,8 @@ final class MainScreenPresenter: MainViewPresenterProtocol {
         MovieAPIService().fetchMovies(withURLString: currentURLString.rawValue) { [weak self] result in
             switch result {
             case let .success(fetchedMovies):
-                DispatchQueue.main.async {
-                    self?.movies = fetchedMovies
-                    self?.view?.success()
-                }
+                self?.movies = fetchedMovies
+                self?.view?.success()
             case let .failure(error):
                 self?.view?.failure(error: error)
             }
