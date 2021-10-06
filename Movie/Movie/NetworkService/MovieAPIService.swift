@@ -1,16 +1,16 @@
-// NetworkService.swift
+// MovieAPIService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Alamofire
 import UIKit
 
-protocol NetworkServiceProtocol {
+protocol MovieAPIServiceProtocol {
     func fetchMovies(withURLString urlString: String, completion: @escaping (Result<[Movie]?, Error>) -> Void)
 
     func fetchImage(forMovie movie: Movie?, completion: @escaping (UIImage) -> Void)
 }
 
-final class NetworkService: NetworkServiceProtocol {
+final class MovieAPIService: MovieAPIServiceProtocol {
     private var baseStringOfImageURL = "https://image.tmdb.org/t/p/original"
 
     func fetchMovies(withURLString urlString: String, completion: @escaping (Result<[Movie]?, Error>) -> Void) {

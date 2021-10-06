@@ -19,7 +19,7 @@
 		ACDFCDAD26B193710092E965 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDAB26B193710092E965 /* MovieTableViewCell.swift */; };
 		ACDFCDC026B221A60092E965 /* DetailMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDBF26B221A60092E965 /* DetailMovieViewController.swift */; };
 		ACDFCDC526B32B490092E965 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDC426B32B490092E965 /* Movies.swift */; };
-		ACDFCDCC26B3306E0092E965 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDCB26B3306E0092E965 /* NetworkService.swift */; };
+		ACDFCDCC26B3306E0092E965 /* MovieAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDCB26B3306E0092E965 /* MovieAPIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +36,7 @@
 		ACDFCDAB26B193710092E965 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		ACDFCDBF26B221A60092E965 /* DetailMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
 		ACDFCDC426B32B490092E965 /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
-		ACDFCDCB26B3306E0092E965 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		ACDFCDCB26B3306E0092E965 /* MovieAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +105,7 @@
 		AC7B8B5E270C7D2F00DF56B1 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				ACDFCDCB26B3306E0092E965 /* NetworkService.swift */,
+				ACDFCDCB26B3306E0092E965 /* MovieAPIService.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -298,7 +298,7 @@
 				ACDFCDC526B32B490092E965 /* Movies.swift in Sources */,
 				ACDFCD8F26B17C240092E965 /* AppDelegate.swift in Sources */,
 				AC7B8B4B270B3AF000DF56B1 /* ModuleBuilder.swift in Sources */,
-				ACDFCDCC26B3306E0092E965 /* NetworkService.swift in Sources */,
+				ACDFCDCC26B3306E0092E965 /* MovieAPIService.swift in Sources */,
 				ACDFCDC026B221A60092E965 /* DetailMovieViewController.swift in Sources */,
 				ACDFCD9126B17C240092E965 /* SceneDelegate.swift in Sources */,
 			);

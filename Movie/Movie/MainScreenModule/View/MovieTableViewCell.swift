@@ -175,7 +175,7 @@ final class MovieTableViewCell: UITableViewCell {
         guard let movie = movie else { return }
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
-        NetworkService().fetchImage(forMovie: movie) { movieImage in
+        MovieAPIService().fetchImage(forMovie: movie) { movieImage in
             self.posterImageView.image = movieImage
         }
     }

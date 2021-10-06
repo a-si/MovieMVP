@@ -24,7 +24,7 @@ final class MainScreenPresenter: MainViewPresenterProtocol {
 
     func fetchMovies(byCategoryNumber categoryNumber: Int) {
         let currentURLString = urlStrings[categoryNumber]
-        NetworkService().fetchMovies(withURLString: currentURLString.rawValue) { [weak self] result in
+        MovieAPIService().fetchMovies(withURLString: currentURLString.rawValue) { [weak self] result in
             switch result {
             case let .success(fetchedMovies):
                 DispatchQueue.main.async {

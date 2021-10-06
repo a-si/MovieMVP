@@ -26,7 +26,7 @@ final class DetailScreenPresenter: DetailViewPresenterProtocol {
     }
 
     func fetchImageForMovie() {
-        NetworkService().fetchImage(forMovie: movie) { [weak self] image in
+        MovieAPIService().fetchImage(forMovie: movie) { [weak self] image in
             self?.view?.set(
                 descriptionForMovie: self?.movie,
                 imageForMovie: image
