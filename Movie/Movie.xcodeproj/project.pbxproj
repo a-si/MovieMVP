@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AC04F5B7270C8D3100F9435B /* DetailScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04F5B6270C8D3000F9435B /* DetailScreenPresenter.swift */; };
+		AC04F5BB270CD0A000F9435B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AC04F5BA270CD0A000F9435B /* Alamofire */; };
 		AC7B8B48270B164C00DF56B1 /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B8B47270B164C00DF56B1 /* MainScreenPresenter.swift */; };
 		AC7B8B4B270B3AF000DF56B1 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B8B4A270B3AF000DF56B1 /* ModuleBuilder.swift */; };
 		ACC75A1126B4B4D200702E79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACC75A1026B4B4D200702E79 /* Assets.xcassets */; };
@@ -17,10 +19,11 @@
 		ACDFCDAD26B193710092E965 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDAB26B193710092E965 /* MovieTableViewCell.swift */; };
 		ACDFCDC026B221A60092E965 /* DetailMovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDBF26B221A60092E965 /* DetailMovieViewController.swift */; };
 		ACDFCDC526B32B490092E965 /* Movies.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDC426B32B490092E965 /* Movies.swift */; };
-		ACDFCDCC26B3306E0092E965 /* MoviesFetchingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDCB26B3306E0092E965 /* MoviesFetchingController.swift */; };
+		ACDFCDCC26B3306E0092E965 /* MovieAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDFCDCB26B3306E0092E965 /* MovieAPIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AC04F5B6270C8D3000F9435B /* DetailScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenPresenter.swift; sourceTree = "<group>"; };
 		AC7B8B47270B164C00DF56B1 /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
 		AC7B8B4A270B3AF000DF56B1 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		ACC75A1026B4B4D200702E79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -33,7 +36,7 @@
 		ACDFCDAB26B193710092E965 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		ACDFCDBF26B221A60092E965 /* DetailMovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMovieViewController.swift; sourceTree = "<group>"; };
 		ACDFCDC426B32B490092E965 /* Movies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movies.swift; sourceTree = "<group>"; };
-		ACDFCDCB26B3306E0092E965 /* MoviesFetchingController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesFetchingController.swift; sourceTree = "<group>"; };
+		ACDFCDCB26B3306E0092E965 /* MovieAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,12 +44,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC04F5BB270CD0A000F9435B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC04F5B4270C893700F9435B /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				AC04F5B6270C8D3000F9435B /* DetailScreenPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		AC7B8B46270B15EF00DF56B1 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,6 +84,49 @@
 			path = AppSceneDelegates;
 			sourceTree = "<group>";
 		};
+		AC7B8B5A270C7CCC00DF56B1 /* MainScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				AC7B8B5C270C7CE600DF56B1 /* View */,
+				AC7B8B46270B15EF00DF56B1 /* Presenter */,
+			);
+			path = MainScreenModule;
+			sourceTree = "<group>";
+		};
+		AC7B8B5C270C7CE600DF56B1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ACDFCD9226B17C240092E965 /* MoviesViewController.swift */,
+				ACDFCDAB26B193710092E965 /* MovieTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AC7B8B5E270C7D2F00DF56B1 /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				ACDFCDCB26B3306E0092E965 /* MovieAPIService.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		AC7B8B60270C7E1B00DF56B1 /* DetailScreenModule */ = {
+			isa = PBXGroup;
+			children = (
+				AC04F5B4270C893700F9435B /* Presenter */,
+				AC7B8B61270C7E7600DF56B1 /* View */,
+			);
+			path = DetailScreenModule;
+			sourceTree = "<group>";
+		};
+		AC7B8B61270C7E7600DF56B1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ACDFCDBF26B221A60092E965 /* DetailMovieViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		ACDFCD8226B17C240092E965 = {
 			isa = PBXGroup;
 			children = (
@@ -93,33 +148,23 @@
 			children = (
 				AC7B8B54270B6A9E00DF56B1 /* AppSceneDelegates */,
 				AC7B8B51270B68E000DF56B1 /* ModuleBuilder */,
-				AC7B8B46270B15EF00DF56B1 /* Presenter */,
+				AC7B8B5A270C7CCC00DF56B1 /* MainScreenModule */,
+				AC7B8B60270C7E1B00DF56B1 /* DetailScreenModule */,
+				AC7B8B5E270C7D2F00DF56B1 /* NetworkService */,
 				ACDFCDB326B194670092E965 /* Model */,
-				ACDFCDB226B194500092E965 /* View */,
-				ACDFCDB026B194340092E965 /* Controller */,
+				ACDFCDB226B194500092E965 /* Storyboard */,
 				ACC75A1026B4B4D200702E79 /* Assets.xcassets */,
 				ACDFCD9C26B17C300092E965 /* Info.plist */,
 			);
 			path = Movie;
 			sourceTree = "<group>";
 		};
-		ACDFCDB026B194340092E965 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				ACDFCD9226B17C240092E965 /* MoviesViewController.swift */,
-				ACDFCDAB26B193710092E965 /* MovieTableViewCell.swift */,
-				ACDFCDBF26B221A60092E965 /* DetailMovieViewController.swift */,
-				ACDFCDCB26B3306E0092E965 /* MoviesFetchingController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		ACDFCDB226B194500092E965 /* View */ = {
+		ACDFCDB226B194500092E965 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
 				ACDFCD9426B17C240092E965 /* Main.storyboard */,
 			);
-			path = View;
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 		ACDFCDB326B194670092E965 /* Model */ = {
@@ -148,6 +193,9 @@
 			dependencies = (
 			);
 			name = Movie;
+			packageProductDependencies = (
+				AC04F5BA270CD0A000F9435B /* Alamofire */,
+			);
 			productName = Movie;
 			productReference = ACDFCD8B26B17C240092E965 /* Movie.app */;
 			productType = "com.apple.product-type.application";
@@ -175,6 +223,9 @@
 				Base,
 			);
 			mainGroup = ACDFCD8226B17C240092E965;
+			packageReferences = (
+				AC04F5B9270CD0A000F9435B /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = ACDFCD8C26B17C240092E965 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -241,12 +292,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACDFCDAD26B193710092E965 /* MovieTableViewCell.swift in Sources */,
+				AC04F5B7270C8D3100F9435B /* DetailScreenPresenter.swift in Sources */,
 				AC7B8B48270B164C00DF56B1 /* MainScreenPresenter.swift in Sources */,
 				ACDFCD9326B17C240092E965 /* MoviesViewController.swift in Sources */,
 				ACDFCDC526B32B490092E965 /* Movies.swift in Sources */,
 				ACDFCD8F26B17C240092E965 /* AppDelegate.swift in Sources */,
 				AC7B8B4B270B3AF000DF56B1 /* ModuleBuilder.swift in Sources */,
-				ACDFCDCC26B3306E0092E965 /* MoviesFetchingController.swift in Sources */,
+				ACDFCDCC26B3306E0092E965 /* MovieAPIService.swift in Sources */,
 				ACDFCDC026B221A60092E965 /* DetailMovieViewController.swift in Sources */,
 				ACDFCD9126B17C240092E965 /* SceneDelegate.swift in Sources */,
 			);
@@ -442,6 +494,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AC04F5B9270CD0A000F9435B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AC04F5BA270CD0A000F9435B /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AC04F5B9270CD0A000F9435B /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = ACDFCD8326B17C240092E965 /* Project object */;
 }

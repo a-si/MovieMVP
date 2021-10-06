@@ -129,8 +129,8 @@ extension MoviesViewController: UITableViewDelegate {
     }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailMovieViewController = DetailMovieViewController()
-        detailMovieViewController.movie = presenter.movies[indexPath.row]
+        let movieToPass = presenter.movies?[indexPath.row]
+        let detailMovieViewController = ModuleBuilder.createDetailScreenModule(withMovie: movieToPass)
         navigationController?.pushViewController(detailMovieViewController, animated: true)
     }
 }
@@ -139,7 +139,7 @@ extension MoviesViewController: UITableViewDelegate {
 
 extension MoviesViewController: UITableViewDataSource {
     func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return presenter.movies.count
+        return presenter.movies?.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,7 +147,7 @@ extension MoviesViewController: UITableViewDataSource {
             withIdentifier: MovieTableViewCell.identifier,
             for: indexPath
         ) as? MovieTableViewCell else { return UITableViewCell() }
-        cell.movie = presenter.movies[indexPath.row]
+        cell.movie = presenter.movies?[indexPath.row]
         cell.configure()
         return cell
     }
@@ -156,7 +156,11 @@ extension MoviesViewController: UITableViewDataSource {
 // MARK: - MainViewProtocol
 
 extension MoviesViewController: MainViewProtocol {
-    func setMovies(movies: [Movie]) {
+    func success() {
         moviesTableView.reloadData()
+    }
+
+    func failure(error: Error) {
+        print(error.localizedDescription)
     }
 }

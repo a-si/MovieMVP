@@ -14,8 +14,6 @@ final class MovieTableViewCell: UITableViewCell {
 
     // MARK: Private Variables
 
-    private var baseStringOfImageURL = "https://image.tmdb.org/t/p/original"
-
     private let movieBackgroundView: UIView = {
         let movieBackgroundView = UIView()
         movieBackgroundView.translatesAutoresizingMaskIntoConstraints = false
@@ -177,18 +175,9 @@ final class MovieTableViewCell: UITableViewCell {
         guard let movie = movie else { return }
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
-        let imagePath = movie.posterPath
-        let fullStringOfImageURL = baseStringOfImageURL + imagePath
-        guard let imageURL = URL(string: fullStringOfImageURL) else { return }
-
-        let fetchImageTask = URLSession.shared.dataTask(with: imageURL) { data, _, _ in
-            guard let imageData = data else { return }
-            guard let movieImage = UIImage(data: imageData) else { return }
-            DispatchQueue.main.async {
-                self.posterImageView.image = movieImage
-            }
+        MovieAPIService().fetchImage(forMovie: movie) { movieImage in
+            self.posterImageView.image = movieImage
         }
-        fetchImageTask.resume()
     }
 
     override func layoutSubviews() {

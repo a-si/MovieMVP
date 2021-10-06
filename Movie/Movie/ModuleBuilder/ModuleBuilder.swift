@@ -14,4 +14,11 @@ final class ModuleBuilder: Builder {
         view.presenter = presenter
         return view
     }
+
+    static func createDetailScreenModule(withMovie movie: Movie?) -> UIViewController {
+        let view = DetailMovieViewController()
+        let presenter = DetailScreenPresenter(view: view, movie: movie)
+        view.presenter = presenter
+        return view
+    }
 }

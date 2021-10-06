@@ -4,13 +4,11 @@
 import UIKit
 
 final class DetailMovieViewController: UIViewController {
-    // MARK: - Private Properties
-
-    private var baseStringOfImageURL = "https://image.tmdb.org/t/p/original"
-
     // MARK: - Public Properties
 
-    var movie: Movie?
+    var presenter: DetailViewPresenterProtocol!
+
+    // MARK: - Private Properties
 
     private var detailPosterImageView: UIImageView = {
         var imageView = UIImageView()
@@ -44,20 +42,36 @@ final class DetailMovieViewController: UIViewController {
         return movieDescriptionLabel
     }()
 
+    // MARK: - Life Cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addViewsToMainView()
+        addConstraints()
+        setupUI()
+        fetchImageForMovie()
+    }
+
     // MARK: Private Methods
 
-    private func fetchTheImage() {
-        guard let imagePath = movie?.posterPath else { return }
-        let fullStringOfImageURL = baseStringOfImageURL + imagePath
-        guard let imageURL = URL(string: fullStringOfImageURL) else { return }
-        let fetchImageTask = URLSession.shared.dataTask(with: imageURL) { data, _, _ in
-            guard let imageData = data else { return }
-            guard let movieImage = UIImage(data: imageData) else { return }
-            DispatchQueue.main.async {
-                self.detailPosterImageView.image = movieImage
-            }
-        }
-        fetchImageTask.resume()
+    private func setupUI() {
+        view.backgroundColor = .black
+    }
+
+    private func addViewsToMainView() {
+        view.addSubview(detailPosterImageView)
+        view.addSubview(movieNameLabel)
+        view.addSubview(movieDescriptionLabel)
+    }
+
+    private func addConstraints() {
+        addPosterImageViewConstraints()
+        addMovieNameLabelConstraints()
+        addMovieDescriptionLabelConstraints()
+    }
+
+    private func fetchImageForMovie() {
+        presenter.fetchImageForMovie()
     }
 
     private func addPosterImageViewConstraints() {
@@ -115,17 +129,13 @@ final class DetailMovieViewController: UIViewController {
             constant: 1
         ).isActive = true
     }
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchTheImage()
-        view.backgroundColor = .black
-        view.addSubview(detailPosterImageView)
-        view.addSubview(movieNameLabel)
-        view.addSubview(movieDescriptionLabel)
-        addPosterImageViewConstraints()
-        addMovieNameLabelConstraints()
-        addMovieDescriptionLabelConstraints()
+// MARK: - DetailViewProtocol
+
+extension DetailMovieViewController: DetailViewProtocol {
+    func set(descriptionForMovie movie: Movie?, imageForMovie image: UIImage) {
+        detailPosterImageView.image = image
         movieNameLabel.text = movie?.title
         movieDescriptionLabel.text = movie?.overview
     }
