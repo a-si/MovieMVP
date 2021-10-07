@@ -10,7 +10,7 @@
 		AC04F5B7270C8D3100F9435B /* DetailScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC04F5B6270C8D3000F9435B /* DetailScreenPresenter.swift */; };
 		AC04F5BB270CD0A000F9435B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = AC04F5BA270CD0A000F9435B /* Alamofire */; };
 		AC7B8B48270B164C00DF56B1 /* MainScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B8B47270B164C00DF56B1 /* MainScreenPresenter.swift */; };
-		AC7B8B4B270B3AF000DF56B1 /* AssemblyModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B8B4A270B3AF000DF56B1 /* AssemblyModuleBuilder.swift */; };
+		AC7B8B4B270B3AF000DF56B1 /* AssemblyModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7B8B4A270B3AF000DF56B1 /* AssemblyModule.swift */; };
 		ACC75A1126B4B4D200702E79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ACC75A1026B4B4D200702E79 /* Assets.xcassets */; };
 		ACDE55DD270DE797005E311D /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE55DC270DE797005E311D /* Router.swift */; };
 		ACDE55F5270E2733005E311D /* MovieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE55F4270E2733005E311D /* MovieTests.swift */; };
@@ -39,7 +39,7 @@
 /* Begin PBXFileReference section */
 		AC04F5B6270C8D3000F9435B /* DetailScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenPresenter.swift; sourceTree = "<group>"; };
 		AC7B8B47270B164C00DF56B1 /* MainScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenPresenter.swift; sourceTree = "<group>"; };
-		AC7B8B4A270B3AF000DF56B1 /* AssemblyModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModuleBuilder.swift; sourceTree = "<group>"; };
+		AC7B8B4A270B3AF000DF56B1 /* AssemblyModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssemblyModule.swift; sourceTree = "<group>"; };
 		ACC75A1026B4B4D200702E79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ACDE55DC270DE797005E311D /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		ACDE55F2270E2733005E311D /* MovieTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,12 +94,12 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		AC7B8B51270B68E000DF56B1 /* ModuleBuilder */ = {
+		AC7B8B51270B68E000DF56B1 /* AssemblyModule */ = {
 			isa = PBXGroup;
 			children = (
-				AC7B8B4A270B3AF000DF56B1 /* AssemblyModuleBuilder.swift */,
+				AC7B8B4A270B3AF000DF56B1 /* AssemblyModule.swift */,
 			);
-			path = ModuleBuilder;
+			path = AssemblyModule;
 			sourceTree = "<group>";
 		};
 		AC7B8B54270B6A9E00DF56B1 /* AppSceneDelegates */ = {
@@ -196,7 +196,7 @@
 			children = (
 				ACDE5606270E5A8E005E311D /* Router */,
 				AC7B8B54270B6A9E00DF56B1 /* AppSceneDelegates */,
-				AC7B8B51270B68E000DF56B1 /* ModuleBuilder */,
+				AC7B8B51270B68E000DF56B1 /* AssemblyModule */,
 				AC7B8B5A270C7CCC00DF56B1 /* MainScreenModule */,
 				AC7B8B60270C7E1B00DF56B1 /* DetailScreenModule */,
 				AC7B8B5E270C7D2F00DF56B1 /* NetworkService */,
@@ -387,7 +387,7 @@
 				ACDFCD9326B17C240092E965 /* MoviesViewController.swift in Sources */,
 				ACDFCDC526B32B490092E965 /* Movies.swift in Sources */,
 				ACDFCD8F26B17C240092E965 /* AppDelegate.swift in Sources */,
-				AC7B8B4B270B3AF000DF56B1 /* AssemblyModuleBuilder.swift in Sources */,
+				AC7B8B4B270B3AF000DF56B1 /* AssemblyModule.swift in Sources */,
 				ACDFCDCC26B3306E0092E965 /* MovieAPIService.swift in Sources */,
 				ACDFCDC026B221A60092E965 /* DetailMovieViewController.swift in Sources */,
 				ACDFCD9126B17C240092E965 /* SceneDelegate.swift in Sources */,

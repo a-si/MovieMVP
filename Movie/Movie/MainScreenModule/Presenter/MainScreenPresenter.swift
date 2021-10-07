@@ -15,11 +15,11 @@ protocol MainViewPresenterProtocol: AnyObject {
 }
 
 final class MainScreenPresenter: MainViewPresenterProtocol {
+    var movies: [Movie]?
     private var urlStrings: [URLStrings] = [.popular, .topRated, .upComing]
     private weak var view: MainViewProtocol?
     private var router: RouterProtocol?
     private var movieAPIService: MovieAPIServiceProtocol
-    var movies: [Movie]?
 
     init(view: MainViewProtocol, movieAPIService: MovieAPIServiceProtocol, router: RouterProtocol) {
         self.view = view

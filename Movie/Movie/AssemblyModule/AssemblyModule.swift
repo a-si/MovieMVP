@@ -3,12 +3,12 @@
 
 import UIKit
 
-protocol AssemblyBuilderProtocol {
+protocol AssemblyProtocol {
     func createMainScreenModule(withRouter router: RouterProtocol) -> UIViewController
     func createDetailScreenModule(withMovie movie: Movie?, andRouter router: RouterProtocol) -> UIViewController
 }
 
-final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
+final class AssemblyModule: AssemblyProtocol {
     func createMainScreenModule(withRouter router: RouterProtocol) -> UIViewController {
         let view = MoviesViewController()
         let movieAPIService = MovieAPIService()

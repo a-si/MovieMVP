@@ -5,7 +5,7 @@ import UIKit
 
 protocol BaseRouterProtocol {
     var navigationController: UINavigationController? { get set }
-    var assemblyBuilder: AssemblyBuilderProtocol? { get set }
+    var assemblyBuilder: AssemblyProtocol? { get set }
 }
 
 protocol RouterProtocol: BaseRouterProtocol {
@@ -17,9 +17,9 @@ protocol RouterProtocol: BaseRouterProtocol {
 final class Router: RouterProtocol {
     var navigationController: UINavigationController?
 
-    var assemblyBuilder: AssemblyBuilderProtocol?
+    var assemblyBuilder: AssemblyProtocol?
 
-    init(navigationController: UINavigationController, assemblyBuilder: AssemblyBuilderProtocol) {
+    init(navigationController: UINavigationController, assemblyBuilder: AssemblyProtocol) {
         self.navigationController = navigationController
         self.assemblyBuilder = assemblyBuilder
     }
