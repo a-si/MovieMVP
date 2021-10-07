@@ -29,6 +29,18 @@ struct Movie: Decodable {
         case posterPath = "poster_path"
     }
 
+    init(
+        overview: String,
+        releaseDate: String,
+        title: String,
+        posterPath: String
+    ) {
+        self.overview = overview
+        self.releaseDate = releaseDate
+        self.title = title
+        self.posterPath = posterPath
+    }
+
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: MovieCodingKeys.self)
         overview = try values.decode(String.self, forKey: MovieCodingKeys.overview)
