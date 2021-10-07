@@ -39,7 +39,6 @@ final class MoviesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchMovies()
         addViewsToMainView()
         customizeUI()
         createConstraints()
@@ -129,9 +128,8 @@ extension MoviesViewController: UITableViewDelegate {
     }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let movieToPass = presenter.movies?[indexPath.row]
-        let detailMovieViewController = ModuleBuilder.createDetailScreenModule(withMovie: movieToPass)
-        navigationController?.pushViewController(detailMovieViewController, animated: true)
+        let selectedMovie = presenter.movies?[indexPath.row]
+        presenter.showDetailMovieVC(withMovie: selectedMovie)
     }
 }
 
@@ -156,11 +154,11 @@ extension MoviesViewController: UITableViewDataSource {
 // MARK: - MainViewProtocol
 
 extension MoviesViewController: MainViewProtocol {
-    func success() {
+    func successToFetchMovies() {
         moviesTableView.reloadData()
     }
 
-    func failure(error: Error) {
+    func failToFetchMovies(withError error: Error) {
         print(error.localizedDescription)
     }
 }
