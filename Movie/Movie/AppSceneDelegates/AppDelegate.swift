@@ -12,14 +12,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         setupURLCache()
         customizeAppAppearance()
-        print("APP. COUNT OF CORE DATA MOVIES = ", CoreDataRepository().getMovies()?.count ?? "nil")
-        var movieTitles: [String] = []
-        let savedMovies = CoreDataRepository().getMovies()
-        if let savedMovies = savedMovies {
-            movieTitles = savedMovies.map { $0.title }
-        }
-        print("APP. COUNT OF MOVIE TITLES!!! = \(movieTitles.count)")
-        print(movieTitles)
         return true
     }
 

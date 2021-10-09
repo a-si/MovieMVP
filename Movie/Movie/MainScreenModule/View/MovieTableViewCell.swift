@@ -171,9 +171,6 @@ final class MovieTableViewCell: UITableViewCell {
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
         posterImageView.image = image
-//        MovieAPIService().fetchImage(forMovie: movie) { movieImage in
-//            self.posterImageView.image = movieImage
-//        }
     }
 
     override func layoutSubviews() {

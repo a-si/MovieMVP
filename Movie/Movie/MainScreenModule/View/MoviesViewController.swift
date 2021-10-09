@@ -164,7 +164,6 @@ extension MoviesViewController: UITableViewDataSource {
 
 extension MoviesViewController: MainViewProtocol {
     func successToFetchMovies() {
-        print("TABLE COUNT OF CORE DATA MOVIES = ", CoreDataRepository().getMovies()?.count ?? "nil")
         moviesTableView.reloadData()
     }
 

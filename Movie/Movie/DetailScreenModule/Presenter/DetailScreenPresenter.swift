@@ -41,14 +41,6 @@ final class DetailScreenPresenter: DetailViewPresenterProtocol {
         router?.popToRoot()
     }
 
-//    func fetchImageForMovie() {
-//        movieAPIService.fetchImage(forMovie: movie) { [weak self] image in
-//            self?.view?.set(
-//                descriptionForMovie: self?.movie,
-//                imageForMovie: image
-//            )
-//        }
-//    }
     func fetchImageForMovie() {
         view?.set(descriptionForMovie: movie, imageForMovie: image)
     }
