@@ -4,9 +4,13 @@
 import UIKit
 
 final class MoviesViewController: UIViewController {
-    // MARK: - Private Variables
+    // MARK: - Public Properties
 
     var presenter: MainViewPresenterProtocol!
+
+    // MARK: - Private Variables
+
+    private lazy var photoCacheService = PhotoCacheService(container: moviesTableView)
 
     private let moviesSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -129,7 +133,10 @@ extension MoviesViewController: UITableViewDelegate {
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedMovie = presenter.movies?[indexPath.row]
-        presenter.showDetailMovieVC(withMovie: selectedMovie)
+        let optionalMovie = presenter.movies?[indexPath.row]
+        guard let movie = optionalMovie else { return }
+        let cachedImage = photoCacheService.photo(at: indexPath, url: movie.posterPath)
+        presenter.showDetailMovieVC(withMovie: selectedMovie, andCachedImage: cachedImage)
     }
 }
 
@@ -145,8 +152,10 @@ extension MoviesViewController: UITableViewDataSource {
             withIdentifier: MovieTableViewCell.identifier,
             for: indexPath
         ) as? MovieTableViewCell else { return UITableViewCell() }
-        cell.movie = presenter.movies?[indexPath.row]
-        cell.configure()
+        let optionalMovie = presenter.movies?[indexPath.row]
+        guard let movie = optionalMovie else { return UITableViewCell() }
+        let cachedImage = photoCacheService.photo(at: indexPath, url: movie.posterPath)
+        cell.configure(withMovie: movie, andCachedImage: cachedImage)
         return cell
     }
 }
@@ -155,6 +164,7 @@ extension MoviesViewController: UITableViewDataSource {
 
 extension MoviesViewController: MainViewProtocol {
     func successToFetchMovies() {
+        print("TABLE COUNT OF CORE DATA MOVIES = ", CoreDataRepository().getMovies()?.count ?? "nil")
         moviesTableView.reloadData()
     }
 
