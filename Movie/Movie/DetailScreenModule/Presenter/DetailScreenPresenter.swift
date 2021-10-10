@@ -6,7 +6,7 @@ import UIKit
 protocol DetailViewProtocol: AnyObject {
     func set(
         descriptionForMovie movie: Movie?,
-        imageForMovie image: UIImage
+        imageForMovie image: UIImage?
     )
 }
 
@@ -20,10 +20,18 @@ final class DetailScreenPresenter: DetailViewPresenterProtocol {
     var movie: Movie?
     private weak var view: DetailViewProtocol?
     private var router: RouterProtocol?
+    private var image: UIImage?
     private var movieAPIService: MovieAPIServiceProtocol
 
-    init(view: DetailViewProtocol, movie: Movie?, movieAPIService: MovieAPIServiceProtocol, router: RouterProtocol) {
+    init(
+        view: DetailViewProtocol,
+        movie: Movie?,
+        image: UIImage?,
+        movieAPIService: MovieAPIServiceProtocol,
+        router: RouterProtocol
+    ) {
         self.view = view
+        self.image = image
         self.movie = movie
         self.movieAPIService = movieAPIService
         self.router = router
@@ -34,11 +42,6 @@ final class DetailScreenPresenter: DetailViewPresenterProtocol {
     }
 
     func fetchImageForMovie() {
-        movieAPIService.fetchImage(forMovie: movie) { [weak self] image in
-            self?.view?.set(
-                descriptionForMovie: self?.movie,
-                imageForMovie: image
-            )
-        }
+        view?.set(descriptionForMovie: movie, imageForMovie: image)
     }
 }

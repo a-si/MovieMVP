@@ -10,7 +10,7 @@ protocol BaseRouterProtocol {
 
 protocol RouterProtocol: BaseRouterProtocol {
     func setInitialViewController()
-    func showDetailMovieController(withMovie movie: Movie?)
+    func showDetailMovieController(withMovie movie: Movie?, andCachedImage: UIImage?)
     func popToRoot()
 }
 
@@ -31,10 +31,10 @@ final class Router: RouterProtocol {
         }
     }
 
-    func showDetailMovieController(withMovie movie: Movie?) {
+    func showDetailMovieController(withMovie movie: Movie?, andCachedImage image: UIImage?) {
         if let navigationController = navigationController {
             guard let detailViewController = assemblyBuilder?
-                .createDetailScreenModule(withMovie: movie, andRouter: self) else { return }
+                .createDetailScreenModule(withMovie: movie, image: image, andRouter: self) else { return }
             navigationController.pushViewController(detailViewController, animated: true)
         }
     }

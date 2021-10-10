@@ -8,10 +8,6 @@ final class MovieTableViewCell: UITableViewCell {
 
     static let identifier = "MovieTableViewCell"
 
-    // MARK: Public Constants
-
-    var movie: Movie?
-
     // MARK: Private Variables
 
     private let movieBackgroundView: UIView = {
@@ -171,13 +167,10 @@ final class MovieTableViewCell: UITableViewCell {
         movieBackgroundView.addSubview(movieReleaseDateLabel)
     }
 
-    func configure() {
-        guard let movie = movie else { return }
+    func configure(withMovie movie: Movie, andCachedImage image: UIImage?) {
         movieNameLabel.text = movie.title
         movieDescriptionLabel.text = movie.overview
-        MovieAPIService().fetchImage(forMovie: movie) { movieImage in
-            self.posterImageView.image = movieImage
-        }
+        posterImageView.image = image
     }
 
     override func layoutSubviews() {

@@ -1,6 +1,7 @@
 // Movies.swift
 // Copyright © RoadMap. All rights reserved.
 
+import CoreData
 import Foundation
 
 enum URLStrings: String {
@@ -16,11 +17,12 @@ struct Movies: Decodable {
     var results: [Movie]
 }
 
-struct Movie: Decodable {
+final class Movie: Decodable {
     var overview: String
     var releaseDate: String
     var title: String
     var posterPath: String
+    var category: Int16 = 0
 
     enum MovieCodingKeys: String, CodingKey {
         case overview
@@ -33,12 +35,14 @@ struct Movie: Decodable {
         overview: String,
         releaseDate: String,
         title: String,
-        posterPath: String
+        posterPath: String,
+        category: Int16
     ) {
         self.overview = overview
         self.releaseDate = releaseDate
         self.title = title
         self.posterPath = posterPath
+        self.category = category
     }
 
     init(from decoder: Decoder) throws {
@@ -48,4 +52,13 @@ struct Movie: Decodable {
         title = try values.decode(String.self, forKey: MovieCodingKeys.title)
         posterPath = try values.decode(String.self, forKey: MovieCodingKeys.posterPath)
     }
+}
+
+@objc(CoreDataMovie)
+final class CoreDataMovie: NSManagedObject {
+    @NSManaged var overview: String
+    @NSManaged var releaseDate: String
+    @NSManaged var title: String
+    @NSManaged var posterPath: String
+    @NSManaged var category: Int16
 }

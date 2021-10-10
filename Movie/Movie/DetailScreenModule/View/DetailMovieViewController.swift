@@ -134,7 +134,7 @@ final class DetailMovieViewController: UIViewController {
 // MARK: - DetailViewProtocol
 
 extension DetailMovieViewController: DetailViewProtocol {
-    func set(descriptionForMovie movie: Movie?, imageForMovie image: UIImage) {
+    func set(descriptionForMovie movie: Movie?, imageForMovie image: UIImage?) {
         detailPosterImageView.image = image
         movieNameLabel.text = movie?.title
         movieDescriptionLabel.text = movie?.overview
