@@ -21,7 +21,6 @@ final class DetailScreenPresenter: DetailViewPresenterProtocol {
     private weak var view: DetailViewProtocol?
     private var router: RouterProtocol?
     private var image: UIImage?
-//    private var movieAPIService: MovieAPIServiceProtocol
 
     init(
         view: DetailViewProtocol,
@@ -33,7 +32,6 @@ final class DetailScreenPresenter: DetailViewPresenterProtocol {
         self.view = view
         self.image = image
         self.movie = movie
-//        self.movieAPIService = movieAPIService
         self.router = router
     }
 
