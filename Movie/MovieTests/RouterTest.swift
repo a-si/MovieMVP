@@ -7,7 +7,7 @@ import XCTest
 class MockNavigationController: UINavigationController {
     var presentedVC: UIViewController?
 
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+    override func pushViewController(_ viewController: UIViewController, animated _: Bool) {
         presentedVC = viewController
         super.pushViewController(viewController, animated: true)
     }
@@ -27,7 +27,7 @@ class RouterTest: XCTestCase {
     }
 
     func testRouter() {
-        router.showDetailMovieController(withMovie: nil)
+        router.showDetailMovieController(withMovie: nil, andCachedImage: UIImage(named: "blackImage"))
         let detailViewController = navigationController.presentedVC
         XCTAssertTrue(detailViewController is DetailMovieViewController)
     }

@@ -132,10 +132,9 @@ extension MoviesViewController: UITableViewDelegate {
     }
 
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedMovie = presenter.movies?[indexPath.row]
-        let optionalMovie = presenter.movies?[indexPath.row]
-        guard let movie = optionalMovie else { return }
-        let cachedImage = photoCacheService.photo(at: indexPath, url: movie.posterPath)
+        let selectedOptionalMovie = presenter.movies?[indexPath.row]
+        guard let selectedMovie = selectedOptionalMovie else { return }
+        let cachedImage = photoCacheService.photo(at: indexPath, url: selectedMovie.posterPath)
         presenter.showDetailMovieVC(withMovie: selectedMovie, andCachedImage: cachedImage)
     }
 }
@@ -155,6 +154,7 @@ extension MoviesViewController: UITableViewDataSource {
         let optionalMovie = presenter.movies?[indexPath.row]
         guard let movie = optionalMovie else { return UITableViewCell() }
         let cachedImage = photoCacheService.photo(at: indexPath, url: movie.posterPath)
+        cell.accessibilityIdentifier = String(indexPath.row)
         cell.configure(withMovie: movie, andCachedImage: cachedImage)
         return cell
     }
