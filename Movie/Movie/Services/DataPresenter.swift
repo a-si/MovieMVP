@@ -1,5 +1,5 @@
 // DataPresenter.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Артём Сыряный. All rights reserved.
 
 import CoreData
 import Foundation
@@ -24,7 +24,7 @@ final class CoreDataRepository: DatabaseProtocol {
 
     func getMovies(forCategoryNumber categoryNumber: Int16) -> [Movie]? {
         let coreDataMovies = try? coreData.context.fetch(CoreDataMovie.fetchRequest()) as? [CoreDataMovie]
-        var movies = [Movie]()
+        var movies: [Movie] = []
         if let coreDataMovies = coreDataMovies {
             for coreDataMovie in coreDataMovies where coreDataMovie.category == categoryNumber {
                 let movie = Movie(
@@ -41,14 +41,14 @@ final class CoreDataRepository: DatabaseProtocol {
     }
 
     func saveMovies(movies: [Movie]?) {
-        guard let moviess = movies else { return }
+        guard let movies = movies else { return }
         let savedMovies = getMovies()
 
         if let savedMovies = savedMovies {
             movieTitles = savedMovies.map { $0.title }
         }
 
-        for movie in moviess {
+        for movie in movies {
             guard !movieTitles.contains(movie.title) else { continue }
             let contextMovie = CoreDataMovie(context: coreData.context)
             contextMovie.overview = movie.overview

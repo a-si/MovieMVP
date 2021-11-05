@@ -1,19 +1,10 @@
 // Movies.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Артём Сыряный. All rights reserved.
 
 import CoreData
 import Foundation
 
-enum URLStrings: String {
-    case popular =
-        "https://api.themoviedb.org/3/movie/popular?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
-    case topRated =
-        "https://api.themoviedb.org/3/movie/top_rated?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
-    case upComing =
-        "https://api.themoviedb.org/3/movie/upcoming?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
-}
-
-struct Movies: Decodable {
+final class Movies: Decodable {
     var results: [Movie]
 }
 
