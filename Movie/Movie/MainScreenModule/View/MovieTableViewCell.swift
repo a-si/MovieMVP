@@ -1,5 +1,5 @@
 // MovieTableViewCell.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Артём Сыряный. All rights reserved.
 
 import UIKit
 
@@ -177,8 +177,8 @@ final class MovieTableViewCell: UITableViewCell {
         super.layoutSubviews()
         backgroundColor = .black
         selectionStyle = .none
-        contentView.addSubview(movieBackgroundView)
         addSubViewsToBackgroundView()
+        contentView.addSubview(movieBackgroundView)
         addBackgroundViewConstraints()
         addPosterImageViewConstraints()
         addMovieNameLabelConstraints()

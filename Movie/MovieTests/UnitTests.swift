@@ -47,17 +47,17 @@ class UnitTests: XCTestCase {
     var movies = [Movie]()
     var coreDataPresenter: DataPresenter<CoreDataRepository>!
     let coreData = CoreDataService.shared
-    
-    func deleteAllData(_ entity:String) {
+
+    func deleteAllData(_ entity: String) {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
         fetchRequest.returnsObjectsAsFaults = false
         do {
             let results = try coreData.context.fetch(fetchRequest)
             for object in results {
-                guard let objectData = object as? NSManagedObject else {continue}
+                guard let objectData = object as? NSManagedObject else { continue }
                 coreData.context.delete(objectData)
             }
-        } catch let error {
+        } catch {
             print("Detele all data in \(entity) error :", error)
         }
     }
@@ -85,7 +85,6 @@ class UnitTests: XCTestCase {
         presenter = MainScreenPresenter(view: view, movieAPIService: movieAPIService, router: router)
 
         var catchedMovies: [Movie]?
-
         movieAPIService.fetchMovies(withURLString: "Test") { result in
             switch result {
             case let .success(movies):
@@ -120,12 +119,10 @@ class UnitTests: XCTestCase {
         deleteAllData("CoreDataMovie")
         let movie = Movie(overview: "Foo", releaseDate: "Baz", title: "Bar", posterPath: "Bar", category: 0)
 
-        let testMovies = [Movie(overview: "Foo", releaseDate: "Baz", title: "Bar", posterPath: "Bar", category: 0)]
-
         coreDataPresenter = DataPresenter(moviesDatabase: CoreDataRepository())
         coreDataPresenter.saveMovies(movies: [movie])
         let savedMovies = coreDataPresenter.getMovies(forCategoryNumber: 0)
-        XCTAssertEqual(savedMovies?.first?.title, testMovies.first?.title)
+        XCTAssertEqual(savedMovies?.first?.title, movie.title)
         XCTAssertNotNil(savedMovies)
     }
 
@@ -133,11 +130,11 @@ class UnitTests: XCTestCase {
         deleteAllData("CoreDataMovie")
         let movie = Movie(overview: "Bar", releaseDate: "Baz", title: "Baz", posterPath: "Foo", category: 0)
 
-        let testMovies = [Movie(overview: "Foo", releaseDate: "Baz", title: "Foo", posterPath: "Bar", category: 0)]
+        let testMovie = Movie(overview: "Foo", releaseDate: "Baz", title: "Foo", posterPath: "Bar", category: 0)
 
         coreDataPresenter = DataPresenter(moviesDatabase: CoreDataRepository())
         coreDataPresenter.saveMovies(movies: [movie])
         let savedMovies = coreDataPresenter.getMovies(forCategoryNumber: 0)
-        XCTAssertNotEqual(savedMovies?.first?.title, testMovies.first?.title)
+        XCTAssertNotEqual(savedMovies?.first?.title, testMovie.title)
     }
 }

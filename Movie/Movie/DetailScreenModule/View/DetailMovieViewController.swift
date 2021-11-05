@@ -1,5 +1,5 @@
 // DetailMovieViewController.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Артём Сыряный. All rights reserved.
 
 import UIKit
 
