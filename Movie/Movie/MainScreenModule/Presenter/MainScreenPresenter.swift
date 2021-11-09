@@ -3,6 +3,15 @@
 
 import UIKit
 
+private enum URLStrings: String {
+    case popular =
+        "https://api.themoviedb.org/3/movie/popular?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
+    case topRated =
+        "https://api.themoviedb.org/3/movie/top_rated?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
+    case upComing =
+        "https://api.themoviedb.org/3/movie/upcoming?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
+}
+
 protocol MainViewProtocol: AnyObject {
     func successToFetchMovies()
     func failToFetchMovies(withError error: Error)
@@ -12,15 +21,6 @@ protocol MainViewPresenterProtocol: AnyObject {
     var movies: [Movie]? { get set }
     func fetchMovies(byCategoryNumber categoryNumber: Int)
     func showDetailMovieVC(withMovie: Movie?, andCachedImage image: UIImage?)
-}
-
-private enum URLStrings: String {
-    case popular =
-        "https://api.themoviedb.org/3/movie/popular?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
-    case topRated =
-        "https://api.themoviedb.org/3/movie/top_rated?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
-    case upComing =
-        "https://api.themoviedb.org/3/movie/upcoming?api_key=ae7677e331c65fa9cf0fcbbe7e2a300d&language=ru&page=1"
 }
 
 final class MainScreenPresenter: MainViewPresenterProtocol {
