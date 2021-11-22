@@ -51,6 +51,8 @@ final class MainScreenPresenter: MainViewPresenterProtocol {
         let movies = coreDataPresenter.getMovies(forCategoryNumber: Int16(categoryNumber))
         self.movies = movies
         view?.successToFetchMovies()
+        
+        // сделал что-то неправильно
     }
 
     func fetchMovies(byCategoryNumber categoryNumber: Int = 0) {
