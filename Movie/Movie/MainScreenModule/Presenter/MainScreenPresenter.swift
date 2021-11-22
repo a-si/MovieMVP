@@ -27,19 +27,24 @@ final class MainScreenPresenter: MainViewPresenterProtocol {
     var movies: [Movie]?
     private var urlStrings: [URLStrings] = [.popular, .topRated, .upComing]
     private weak var view: MainViewProtocol?
-    private var router: RouterProtocol?
+    private var router: RouterProtocol
     private var movieAPIService: MovieAPIServiceProtocol
-    private var coreDataPresenter = DataPresenter(moviesDatabase: CoreDataRepository())
-
-    init(view: MainViewProtocol, movieAPIService: MovieAPIServiceProtocol, router: RouterProtocol) {
+    private var coreDataPresenter: DataPresenter<CoreDataRepository>
+    init(
+        view: MainViewProtocol,
+        movieAPIService: MovieAPIServiceProtocol,
+        router: RouterProtocol,
+        coreDataPresenter: DataPresenter<CoreDataRepository>
+    ) {
         self.view = view
         self.movieAPIService = movieAPIService
         self.router = router
+        self.coreDataPresenter = coreDataPresenter
         fetchMovies()
     }
 
     func showDetailMovieVC(withMovie movie: Movie?, andCachedImage image: UIImage?) {
-        router?.showDetailMovieController(withMovie: movie, andCachedImage: image)
+        router.showDetailMovieController(withMovie: movie, andCachedImage: image)
     }
 
     func fetchFromRepository(byCategoryNumber categoryNumber: Int = 0) {

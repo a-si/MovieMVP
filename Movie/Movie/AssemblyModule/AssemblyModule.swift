@@ -13,7 +13,13 @@ final class AssemblyModule: AssemblyProtocol {
     func createMainScreenModule(withRouter router: RouterProtocol) -> UIViewController {
         let view = MoviesViewController()
         let movieAPIService = MovieAPIService()
-        let presenter = MainScreenPresenter(view: view, movieAPIService: movieAPIService, router: router)
+        let coreDataPresenter = DataPresenter(moviesDatabase: CoreDataRepository())
+        let presenter = MainScreenPresenter(
+            view: view,
+            movieAPIService: movieAPIService,
+            router: router,
+            coreDataPresenter: coreDataPresenter
+        )
         view.presenter = presenter
         return view
     }
