@@ -51,6 +51,7 @@ final class MoviesViewController: UIViewController {
         
         print("Did something work")
         print("Did additional work")
+        print("Something new")
     }
 
     // MARK: - Private Methods
