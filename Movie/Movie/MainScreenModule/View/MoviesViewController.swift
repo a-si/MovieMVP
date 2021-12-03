@@ -50,6 +50,7 @@ final class MoviesViewController: UIViewController {
         setDelegateAndDataSurce()
         
         print("Did something work")
+        print("Did additional work")
     }
 
     // MARK: - Private Methods
