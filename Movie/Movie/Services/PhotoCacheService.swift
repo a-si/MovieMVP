@@ -17,6 +17,7 @@ final class PhotoCacheService {
 
     private var images: [String: UIImage] = [:]
     private lazy var fileManager = FileManager.default
+    private var placeholderImage: UIImage? = UIImage(named: "blackImage")
 
     // MARK: - Initializers
 
@@ -30,15 +31,13 @@ final class PhotoCacheService {
 
     // MARK: - API
 
-    var placeholderImage: UIImage? = UIImage(named: "blackImage")
-
     func photo(at indexPath: IndexPath, url: String) -> UIImage? {
         if let image = images[url] {
             return image
         } else if let image = getImageFromDisk(url: url) {
             return image
         } else {
-            loadImageFromNet(url: url, indexPath: indexPath)
+              loadImageFromNet(url: url, indexPath: indexPath)
             return placeholderImage
         }
     }

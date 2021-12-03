@@ -19,6 +19,7 @@ protocol MainViewProtocol: AnyObject {
 
 protocol MainViewPresenterProtocol: AnyObject {
     var movies: [Movie]? { get set }
+    var photoCacheService: PhotoCacheService { get }
     func fetchMovies(byCategoryNumber categoryNumber: Int)
     func showDetailMovieVC(withMovie: Movie?, andCachedImage image: UIImage?)
 }
@@ -30,16 +31,19 @@ final class MainScreenPresenter: MainViewPresenterProtocol {
     private var router: RouterProtocol
     private var movieAPIService: MovieAPIServiceProtocol
     private var coreDataPresenter: DataPresenter<CoreDataRepository>
+    var photoCacheService: PhotoCacheService
     init(
         view: MainViewProtocol,
         movieAPIService: MovieAPIServiceProtocol,
         router: RouterProtocol,
-        coreDataPresenter: DataPresenter<CoreDataRepository>
+        coreDataPresenter: DataPresenter<CoreDataRepository>,
+        photoCacheService: PhotoCacheService
     ) {
         self.view = view
         self.movieAPIService = movieAPIService
         self.router = router
         self.coreDataPresenter = coreDataPresenter
+        self.photoCacheService = photoCacheService
         fetchMovies()
     }
 
@@ -51,8 +55,6 @@ final class MainScreenPresenter: MainViewPresenterProtocol {
         let movies = coreDataPresenter.getMovies(forCategoryNumber: Int16(categoryNumber))
         self.movies = movies
         view?.successToFetchMovies()
-        
-        // сделал что-то неправильно
     }
 
     func fetchMovies(byCategoryNumber categoryNumber: Int = 0) {

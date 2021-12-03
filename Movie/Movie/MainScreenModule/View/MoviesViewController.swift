@@ -8,9 +8,15 @@ final class MoviesViewController: UIViewController {
 
     var presenter: MainViewPresenterProtocol!
 
-    // MARK: - Private Variables
+    // MARK: - Public Constants
 
-    private lazy var photoCacheService = PhotoCacheService(container: moviesTableView)
+    let moviesTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+
+    // MARK: - Private Variables
 
     private let moviesSearchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -33,12 +39,6 @@ final class MoviesViewController: UIViewController {
         return segmentedControl
     }()
 
-    private let moviesTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
-
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
@@ -48,6 +48,8 @@ final class MoviesViewController: UIViewController {
         createConstraints()
         registerCell()
         setDelegateAndDataSurce()
+        
+        print("Did something work")
     }
 
     // MARK: - Private Methods
@@ -134,7 +136,7 @@ extension MoviesViewController: UITableViewDelegate {
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedOptionalMovie = presenter.movies?[indexPath.row]
         guard let selectedMovie = selectedOptionalMovie else { return }
-        let cachedImage = photoCacheService.photo(at: indexPath, url: selectedMovie.posterPath)
+        let cachedImage = presenter.photoCacheService.photo(at: indexPath, url: selectedMovie.posterPath)
         presenter.showDetailMovieVC(withMovie: selectedMovie, andCachedImage: cachedImage)
     }
 }
@@ -153,7 +155,7 @@ extension MoviesViewController: UITableViewDataSource {
         ) as? MovieTableViewCell else { return UITableViewCell() }
         let optionalMovie = presenter.movies?[indexPath.row]
         guard let movie = optionalMovie else { return UITableViewCell() }
-        let cachedImage = photoCacheService.photo(at: indexPath, url: movie.posterPath)
+        let cachedImage = presenter.photoCacheService.photo(at: indexPath, url: movie.posterPath)
         cell.accessibilityIdentifier = String(indexPath.row)
         cell.configure(withMovie: movie, andCachedImage: cachedImage)
         return cell
