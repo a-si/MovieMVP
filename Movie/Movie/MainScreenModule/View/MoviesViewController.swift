@@ -48,6 +48,8 @@ final class MoviesViewController: UIViewController {
         createConstraints()
         registerCell()
         setDelegateAndDataSurce()
+        
+        print("Did something work")
     }
 
     // MARK: - Private Methods
